@@ -1,4 +1,1 @@
-# Getting 
-
-In the project directory, you can run:
-### `npm start`
+# React JS Google Clone

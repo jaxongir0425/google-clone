@@ -1,9 +1,9 @@
 import React from "react";
 import "./SearchPage.css";
-import { useStateValue } from "./StateProvider";
+import {useStateValue} from "./StateProvider";
 import useGoogleSearch from "./useGoogleSearch";
 import Response from "./response";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Search from "./pages/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import DescriptionIcon from "@material-ui/icons/Description";
@@ -16,10 +16,10 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 function SearchPage() {
 
-    const [{ term }, dispatch] = useStateValue();
+    const [{term}, dispatch] = useStateValue();
 
     // Realniy API ni chaqiramiz
-    const { data } = useGoogleSearch(term);
+    const {data} = useGoogleSearch(term);
 
     // API ni chaqiribkoramiz
     // const data = Response;
@@ -32,42 +32,42 @@ function SearchPage() {
 
     return (
         <div className="SearchPage">
-           
+
             <div className="searchPage__header">
                 <Link to="/">
-                <img 
-                  className="searchPage__logo"
-                  src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-                  alt=""
-                />
+                    <img
+                        className="searchPage__logo"
+                        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                        alt=""
+                    />
                 </Link>
                 <div className="searchPage__headerBody">
-                    <Search hideButtons />
+                    <Search hideButtons/>
 
                     <div className="searchPage__options">
                         <div className="searchPage__optionsLeft">
                             <div className="searchPage__option">
-                                <SearchIcon />
+                                <SearchIcon/>
                                 <Link to="/all">All</Link>
                             </div>
                             <div className="searchPage__option">
-                                <DescriptionIcon />
+                                <DescriptionIcon/>
                                 <Link to="/news">News</Link>
                             </div>
                             <div className="searchPage__option">
-                                <ImageIcon />
+                                <ImageIcon/>
                                 <Link to="/images">Images</Link>
                             </div>
                             <div className="searchPage__option">
-                                <LocalOfferIcon />
+                                <LocalOfferIcon/>
                                 <Link to="/shopping">Shopping</Link>
                             </div>
                             <div className="searchPage__option">
-                                <RoomIcon />
+                                <RoomIcon/>
                                 <Link to="/maps">Maps</Link>
                             </div>
                             <div className="searchPage__option">
-                                <MoreVertIcon />
+                                <MoreVertIcon/>
                                 <Link to="/more">More</Link>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ function SearchPage() {
                                 <Link to="/tools">Tools</Link>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -87,41 +87,41 @@ function SearchPage() {
             </div>
 
 
-           {term && (
+            {term && (
                 <div className="searchPage__results">
                     <p className="searchPage__resultCount">
-                        About {data?.searchInformation.formattedTotalResults} 
+                        About {data?.searchInformation.formattedTotalResults}
                         results ({data?.searchInformation.formattedSearchTime}
-                         seconds) for {term}
-                    </p>     
+                        seconds) for {term}
+                    </p>
 
                     {data?.items.map(item => (
                         <div className="searchPage__result">
-                            <a 
-                            className="searchPage__resultLink"
-                            href={item.link}>
+                            <a
+                                className="searchPage__resultLink"
+                                href={item.link}>
                                 {item.pagemap?.cse_image?.length > 0 && item.pagemap?.cse_image[0]?.src && (
-                                    <img 
-                                    className="searchPage__resultImage" 
-                                    src={item.pagemap?.cse_image[0]?.src}
+                                    <img
+                                        className="searchPage__resultImage"
+                                        src={item.pagemap?.cse_image[0]?.src}
                                     />
                                 )}
-                                
+
                                 {item.displayLink}
                                 <ArrowDownwardIcon/>
                             </a>
-                            <a 
-                            className="searchPage__resultTittle"
-                            href={item.link}>
+                            <a
+                                className="searchPage__resultTittle"
+                                href={item.link}>
                                 <h2>{item.title}</h2>
                             </a>
                             <p className="searchPage__resultSnippet">
                                 {item.snippet}
                             </p>
                         </div>
-                    ))}         
+                    ))}
                 </div>
-           )}
+            )}
 
         </div>
     )
